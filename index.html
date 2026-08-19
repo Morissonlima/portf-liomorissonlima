@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morisson Lima — Designer Educacional</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Syne"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#030305',
+                            dark: '#08080c',
+                            card: 'rgba(15, 15, 22, 0.7)',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            accent: '#ffffff',
+                            glow: 'rgba(255, 255, 255, 0.15)'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Spotlight de Cursor Interativo */
+        #cursor-spotlight {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 30%), rgba(255, 255, 255, 0.08), transparent 80%);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Grid de fundo interativo cinematográfico */
+        .hero-grid-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 100%);
+        }
+
+        /* Cards Fluidos e Modernos */
+        .fluid-card {
+            background: linear-gradient(135deg, rgba(20, 20, 28, 0.75) 0%, rgba(10, 10, 15, 0.9) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fluid-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.5rem;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.15) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
+        }
+
+        .fluid-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 255, 255, 0.08);
+        }
+
+        .fluid-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Container de imagem fluido */
+        .fluid-img-wrapper {
+            position: relative;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            background: #0d0d14;
+        }
+
+        .fluid-img-wrapper img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+        }
+
+        .fluid-card:hover .fluid-img-wrapper img {
+            transform: scale(1.06);
+            filter: brightness(1.1) contrast(1.02);
+        }
+
+        /* Sombra e vignette fluido cinematográfico */
+        .fluid-vignette {
+            background: linear-gradient(180deg, rgba(0,0,0,0) 20%, rgba(8, 8, 12, 0.8) 75%, rgba(8, 8, 12, 0.98) 100%);
+        }
+
+        /* Efeito de brilho do Card */
+        .card-light-spot {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fluid-card:hover .card-light-spot {
+            opacity: 1;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030305;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffffff;
+        }
+
+        /* Badges e pílulas */
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s ease;
+        }
+        .glass-pill:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-white selection:text-black">
+
+    <!-- Spotlight de Cursor em Tempo Real -->
+    <div id="cursor-spotlight"></div>
+
+    <header class="sticky top-0 z-50 backdrop-blur-2xl bg-black/60 border-b border-white/10 transition-all">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative z-10">
+            
+            <!-- Logo Morisson Lima -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="relative">
+                    <img src="https://lh3.googleusercontent.com/a/ACg8ocKWxqewY5X8c89YLGrDRjrYMzrfzIlY4RlWUybkcEAREchBn9a4=s360-c-no" 
+                         alt="Morisson Lima" 
+                         class="w-10 h-10 rounded-full object-cover ring-2 ring-white/20 group-hover:ring-white transition-all shadow-lg">
+                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-black rounded-full animate-pulse"></span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-sm tracking-tight text-white uppercase leading-none group-hover:text-zinc-200 transition-colors">Morisson Lima</span>
+                    <span class="text-[10px] text-zinc-400 font-mono tracking-widest uppercase mt-1">Designer Educacional</span>
+                </div>
+            </a>
+
+            <!-- Navegação Desktop -->
+            <nav class="hidden md:flex items-center gap-8 text-xs font-mono font-bold uppercase tracking-widest">
+                <a href="#edtech" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="text-white/40 group-hover:text-white transition-colors">01</span> EdTech & DI
+                </a>
+                <a href="#social" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="text-white/40 group-hover:text-white transition-colors">02</span> Social & Mídia
+                </a>
+                <a href="#sobre" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="text-white/40 group-hover:text-white transition-colors">03</span> Sobre
+                </a>
+                <a href="#contato" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-2 group">
+                    <span class="text-white/40 group-hover:text-white transition-colors">04</span> Contato
+                </a>
+            </nav>
+
+            <!-- Status / Localização -->
+            <div class="hidden lg:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-300">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                SÃO PAULO · BR
+            </div>
+
+            <!-- Botão Menu Mobile -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-zinc-300 text-xl p-2 rounded-lg bg-white/5 border border-white/10" aria-label="Abrir menu mobile">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Menu Mobile Overlay -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-4 font-mono text-xs uppercase tracking-widest">
+            <a href="#edtech" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">01 · EdTech & DI</a>
+            <a href="#social" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">02 · Social Media & Mídia</a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">03 · Sobre mim</a>
+            <a href="#contato" onclick="toggleMobileMenu()" class="block text-white font-bold py-2">04 · Contato</a>
+        </div>
+    </header>
+
+    <main class="flex-grow relative z-10">
+        
+        <section id="hero" class="relative pt-12 pb-20 md:pt-24 md:pb-32 px-6 max-w-7xl mx-auto w-full overflow-hidden">
+            <!-- Grid de Fundo Animado -->
+            <div class="absolute inset-0 hero-grid-pattern opacity-50 pointer-events-none"></div>
+            
+            <!-- Glows Orbitais -->
+            <div class="absolute -top-20 -left-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute top-1/3 -right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                
+                <!-- Lado Esquerdo -->
+                <div class="lg:col-span-7 space-y-8">
+                    
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/15 text-white text-[11px] font-mono font-semibold tracking-wider uppercase backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                        MORISSON ADRIANO ALMEIDA LIMA
+                    </div>
+                    
+                    <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05]">
+                        Design, Educação <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 via-zinc-400 to-zinc-600">& Saúde.</span>
+                    </h1>
+
+                    <p class="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+                        Sou designer e tenho me dedicado à criação de experiências digitais que conectam educação e saúde. Transformando evidências científicas em conteúdos acessíveis por meio de metodologias ativas, gamificação e design centrado no usuário.
+                    </p>
+
+                    <!-- Pílulas de Especialidades -->
+                    <div class="flex flex-wrap gap-2.5 pt-2 text-[11px] font-mono uppercase tracking-wider">
+                        <span class="glass-pill px-4 py-2 rounded-xl text-white font-semibold flex items-center gap-2">
+                            <i class="fas fa-graduation-cap text-zinc-400"></i> Design Instrucional
+                        </span>
+                        <span class="glass-pill px-4 py-2 rounded-xl text-white font-semibold flex items-center gap-2">
+                            <i class="fas fa-gamepad text-zinc-400"></i> Gamificação
+                        </span>
+                        <span class="glass-pill px-4 py-2 rounded-xl text-white font-semibold flex items-center gap-2">
+                            <i class="fas fa-brain text-zinc-400"></i> IA na Educação
+                        </span>
+                        <span class="glass-pill px-4 py-2 rounded-xl text-white font-semibold flex items-center gap-2">
+                            <i class="fas fa-heartbeat text-zinc-400"></i> Educação em Saúde
+                        </span>
+                    </div>
+
+                    <!-- CTAs do Hero -->
+                    <div class="flex flex-wrap items-center gap-4 pt-4">
+                        <a href="#edtech" class="px-7 py-3.5 bg-white text-black font-extrabold rounded-2xl hover:bg-zinc-200 transition-all text-xs uppercase tracking-wider shadow-xl hover:shadow-white/10 flex items-center gap-2">
+                            Explorar Portfólio <i class="fas fa-arrow-down text-xs"></i>
+                        </a>
+                        <a href="#contato" class="px-7 py-3.5 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider backdrop-blur-md flex items-center gap-2">
+                            Iniciar Projeto <i class="fas fa-paper-plane text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative">
+                    <!-- Banner Interativo Hero Showcase -->
+                    <div class="fluid-card p-4 sm:p-6 space-y-4 group transition-all duration-500">
+                        <div class="card-light-spot"></div>
+
+                        <div class="fluid-img-wrapper aspect-[4/3] w-full relative">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczPLa_BVEBDnAQ1A20S92QG8rn1bwEbscahQi68FHG-MpbO2DoyIrYBBMLsAEBPm8jjZOq10zHiVMYmITmvqmRNscEv8a1PY9PTCUvLiXK4LmwW9rQG7xSwoeRT_6KB1HfxI-ZPE3FMOSvczbHhwZOYV=w1024-h768-s-no-gm?authuser=0" 
+                                 alt="Projetos Morisson Lima" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-white text-[9px] font-mono font-bold px-3 py-1.5 rounded-full border border-white/20 tracking-wider uppercase">
+                                <i class="fas fa-sparkles text-amber-300 mr-1"></i> INTERAÇÃO & EXPERIÊNCIA
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 pt-2">
+                            <div class="flex items-center justify-between text-xs font-mono text-zinc-400">
+                                <span>UX/UI & DESIGN INSTRUCIONAL</span>
+                                <span class="text-emerald-400 font-bold">2026 EDITION</span>
+                            </div>
+                            <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors">
+                                Interfaces educacionais & simulações em saúde
+                            </h3>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                Unindo rigor acadêmico, estética contemporânea e arquitetura de informação focada em aprendizado.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 pt-2 border-t border-white/10 font-mono text-center">
+                            <div class="p-2 rounded-xl bg-white/5 border border-white/10">
+                                <span class="block text-sm font-bold text-white">100%</span>
+                                <span class="text-[9px] text-zinc-400 uppercase">Interativo</span>
+                            </div>
+                            <div class="p-2 rounded-xl bg-white/5 border border-white/10">
+                                <span class="block text-sm font-bold text-white">EdTech</span>
+                                <span class="text-[9px] text-zinc-400 uppercase">Foco DI</span>
+                            </div>
+                            <div class="p-2 rounded-xl bg-white/5 border border-white/10">
+                                <span class="block text-sm font-bold text-white">Mídia</span>
+                                <span class="text-[9px] text-zinc-400 uppercase">Dados reais</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="edtech" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10 relative">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-6xl font-display font-extrabold text-white/20 block -mb-4">01</span>
+                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2">01 · PORTFÓLIO PRINCIPAL</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">EdTech & Design Instrucional</h2>
+                </div>
+                <p class="text-zinc-300 text-xs sm:text-sm max-w-md leading-relaxed">
+                    Criação de produtos educacionais, simulações interativas e ambientes virtuais.
+                </p>
+            </div>
+
+            <!-- PROJETO DESTAQUE HERO (Clinical Escape) -->
+            <div class="fluid-card rounded-3xl overflow-hidden mb-12 group p-2 sm:p-4">
+                <div class="card-light-spot"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    
+                    <div class="lg:col-span-7">
+                        <div class="fluid-img-wrapper aspect-video sm:aspect-[16/9] w-full">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczNuA29mHRt2qAdlgAfZyZ2Te8IcZB_qoPfv_g2NnXcLl4D62MHZl0rnndAxdFJowAV6n62ILSrDTPoFv2CVZn_DQvPT-LDdrt0Hs0-R18r913iBHKMpQCmJny79CrNLd04TqIX40IwBE1ygxbdN-gwF=w1408-h792-s-no-gm?authuser=0" 
+                                 alt="Simulações Clínicas em Saúde" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-4 left-4 bg-white text-black text-[10px] font-mono font-extrabold px-3.5 py-1.5 rounded-full tracking-wider uppercase shadow-xl">
+                                DESTAQUE · EDUCAÇÃO EM SAÚDE
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 p-4 sm:p-6 flex flex-col justify-between h-full space-y-6">
+                        <div class="space-y-3">
+                            <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">CASOS CLÍNICOS REAIS</span>
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white group-hover:text-zinc-200 transition-colors">
+                                Simulações clínicas em saúde
+                            </h3>
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                                Desenvolvimento de um site educacional para o ensino de Hematologia e Hemoglobinopatias com casos clínicos reais.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row gap-3">
+                            <a href="https://sites.google.com/view/clinical-escape/in%C3%ADcio?authuser=0" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center justify-center w-full py-3.5 bg-white text-black hover:bg-zinc-200 font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider shadow-lg">
+                                Ver Projeto Completo <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- GRID SECUNDÁRIA EDTECH -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Unifesp Tô Dentro -->
+                <div class="fluid-card p-3 sm:p-4 flex flex-col justify-between group">
+                    <div class="card-light-spot"></div>
+                    <div>
+                        <div class="fluid-img-wrapper aspect-video w-full mb-5">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczM-u1lcA-lyQ9a-MJ0gqbeGQpPQiJ1n6yadBk9L-hV5Y76HOkPh_J5mTGSYpIeo78J8d_zs2NjyJKD-lVz7srl5H_L5Fzj5J3EiUBGnAogc-GVxtE3-F2iyNJu7Ylt239fDF99kSKvwshkh4pKPgNBB=w1408-h792-s-no-gm?authuser=0" 
+                                 alt="Unifesp Tô Dentro" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                                WEB APP
+                            </div>
+                        </div>
+                        <div class="px-2 space-y-2 mb-6">
+                            <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors">Unifesp Tô Dentro</h3>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                App web focado na sensibilização de estudantes e sistema interativo para descoberta de carreira acadêmica e ingresso na universidade pública.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2">
+                        <a href="https://morissonlima.github.io/unifesptodentro/" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
+                            Visitar Web App <i class="fas fa-external-link-alt ml-2 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portal NEI Paulistinha -->
+                <div class="fluid-card p-3 sm:p-4 flex flex-col justify-between group">
+                    <div class="card-light-spot"></div>
+                    <div>
+                        <div class="fluid-img-wrapper aspect-video w-full mb-5">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczPWtIJcdeq4Q0qsHu0NU3dR8Y04h8-zjv-qlfNRAdRtyfpw94JlgKEB0TADPuPQajSwRBzb4tHtAcrQT43sUsAmP3uFmuwhOgg5hPpRSIq5e-3K8VKiBrsbNc-cmQ-IfcDZnTzyLZG2xTs7K4hdpMRG=w1408-h792-s-no-gm?authuser=0" 
+                                 alt="Portal NEI Paulistinha" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                                PORTAL EDUCACIONAL
+                            </div>
+                        </div>
+                        <div class="px-2 space-y-2 mb-6">
+                            <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors">Portal NEI Paulistinha</h3>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                Rebranding do site escolar NEI Paulistinha, com conteúdos pedagógicos, gestão de informação e comunicação escolar.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2">
+                        <a href="https://morissonlima.github.io/neipaulistinha/" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
+                            Visitar Portal <i class="fas fa-external-link-alt ml-2 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Conteúdo Educativo em DI -->
+                <div class="fluid-card p-3 sm:p-4 flex flex-col justify-between group">
+                    <div class="card-light-spot"></div>
+                    <div>
+                        <div class="fluid-img-wrapper aspect-video w-full mb-5">
+                            <img src="https://lh3.googleusercontent.com/pw/AP1GczNn5axUt9tF1BAHYZ2ZrGNljjXjuHKI34OniWVHDTmZe9X3KXxehHCmKPKtW2rwpJk1FBqXhIZXdEHpkoYXMpFp_b-B5EdEtnvtnO9JzW22GUYQqhbEZ6hGnS9qD5EOvesD63qd_el7jLb5fsr7UVG8=w1408-h792-s-no-gm?authuser=0" 
+                                 alt="Conteúdo Educativo em DI" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                                BEHANCE & ARTIGOS
+                            </div>
+                        </div>
+                        <div class="px-2 space-y-2 mb-6">
+                            <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors">Conteúdo Educativo em DI</h3>
+                            <p class="text-zinc-300 text-xs leading-relaxed">
+                                Compartilho insights, artigos e projetos sobre Design Instrucional e Inteligência Artificial na Educação.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-2 pb-2">
+                        <a href="https://www.behance.net/morissoalmeida" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
+                            Ver no Behance <i class="fab fa-behance ml-2 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="social" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-6xl font-display font-extrabold text-white/20 block -mb-4">02</span>
+                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2">02 · BRANDING & MÍDIA</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">Social media</h2>
+                </div>
+                <p class="text-zinc-300 text-xs sm:text-sm max-w-md leading-relaxed">
+                    Estratégia visual, copywriting, captação audiovisual e gestão de presença digital.
+                </p>
+            </div>
+
+            <!-- GRID DE CLIENTES E PRODUÇÕES AUDIOVISUAIS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Cliente 1: Brunno Massoterapeuta -->
+                <div class="fluid-card p-4 sm:p-6 flex flex-col justify-between group">
+                    <div class="card-light-spot"></div>
+                    <div>
+                        <div class="fluid-img-wrapper aspect-video w-full mb-6">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn9seekOlwcjoywQ1pS-OIX0CkgF72FHosiCyun0a_p4Pwy5b3WJngi7Z_&s=10" 
+                                 alt="Brunno Massoterapeuta" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                                SAÚDE & BEM-ESTAR
+                            </div>
+                        </div>
+                        <div class="space-y-3 mb-6">
+                            <div class="text-zinc-400 text-[10px] font-mono font-bold uppercase tracking-widest flex items-center gap-1.5">
+                                <i class="fab fa-instagram text-white"></i> INSTAGRAM BRANDING
+                            </div>
+                            <h3 class="font-display font-bold text-2xl text-white group-hover:text-zinc-200 transition-colors">Brunno Massoterapeuta</h3>
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                                Desenvolvimento de artes gráficas e planejamento de conteúdo educacional na área de saúde. Criação de copywriting, edição de vídeos e estratégias de marketing.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono text-zinc-300">
+                                <span class="glass-pill px-3 py-1 rounded-lg">Branding</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg">Copywriting</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg">Edição de vídeo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10">
+                        <a href="https://www.instagram.com/brunnomassoterapeuta/" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
+                            Ver no Instagram <i class="fab fa-instagram ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cliente 2: Fábio Freitas -->
+                <div class="fluid-card p-4 sm:p-6 flex flex-col justify-between group">
+                    <div class="card-light-spot"></div>
+                    <div>
+                        <div class="fluid-img-wrapper aspect-video w-full mb-6">
+                            <img src="https://www.salvadordabahia.com/capitalafro/wp-content/uploads/2022/10/Barbearias.-SCA.-Leo-Santos.-Brotas.-Salvador-Bahia.-Foto-Jefferson-Dias-10-scaled.jpg" 
+                                 alt="Fábio Freitas" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                                BRANDING & ESTILO
+                            </div>
+                        </div>
+                        <div class="space-y-3 mb-6">
+                            <div class="text-zinc-400 text-[10px] font-mono font-bold uppercase tracking-widest flex items-center gap-1.5">
+                                <i class="fas fa-cut text-white"></i> SOCIAL MEDIA & MÍDIA
+                            </div>
+                            <h3 class="font-display font-bold text-2xl text-white group-hover:text-zinc-200 transition-colors">Fábio Freitas</h3>
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                                Gestão de presença digital e estratégia de conteúdo.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono text-zinc-300">
+                                <span class="glass-pill px-3 py-1 rounded-lg">Social Media</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg">Conteúdo</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg">Estratégia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10">
+                        <a href="https://www.instagram.com/fabiopie/" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
+                            Ver no Instagram <i class="fab fa-instagram ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Evento 1: Festival Revelando SP -->
+                <div class="fluid-card p-4 sm:p-6 flex flex-col justify-between group">
+                    <div class="card-light-spot"></div>
+                    <div>
+                        <div class="fluid-img-wrapper aspect-video w-full mb-6">
+                            <img src="https://registro.sp.gov.br/wp-content/uploads/2026/02/revelando.jpeg" 
+                                 alt="Festival Revelando SP" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                                COBERTURA & CULTURA
+                            </div>
+                        </div>
+                        <div class="space-y-3 mb-6">
+                            <div class="text-zinc-400 text-[10px] font-mono font-bold uppercase tracking-widest flex items-center gap-1.5">
+                                <i class="fas fa-camera text-white"></i> EVENTO CULTURAL
+                            </div>
+                            <h3 class="font-display font-bold text-2xl text-white group-hover:text-zinc-200 transition-colors">Festival Revelando SP</h3>
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                                Cobertura audiovisual, captação de conteúdo dinâmico em tempo real.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono text-zinc-300">
+                                <span class="glass-pill px-3 py-1 rounded-lg">Cobertura</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg">Fotografia</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg">Vídeo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10">
+                        <a href="https://www.instagram.com/reels/C_xgl3IusYa/" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
+                            Ver Reels <i class="fab fa-instagram ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Evento 2: Festival do Café -->
+                <div class="fluid-card p-4 sm:p-6 flex flex-col justify-between group">
+                    <div class="card-light-spot"></div>
+                    <div>
+                        <div class="fluid-img-wrapper aspect-video w-full mb-6">
+                            <img src="https://cdn.prod.website-files.com/63d3c43a87589374d0a09844/664b9e942e1a45091e46430c_festival-cafe-site.png" 
+                                 alt="Festival do Café" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                                EVENTO & MÍDIA
+                            </div>
+                        </div>
+                        <div class="space-y-3 mb-6">
+                            <div class="text-zinc-400 text-[10px] font-mono font-bold uppercase tracking-widest flex items-center gap-1.5">
+                                <i class="fas fa-coffee text-white"></i> MÍDIA AUDIOVISUAL
+                            </div>
+                            <h3 class="font-display font-bold text-2xl text-white group-hover:text-zinc-200 transition-colors">Festival do Café</h3>
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                                Captação de vídeos para o canal @todepasseio. Guia cinematográfico pelas 10 cafeterias mais icônicas do Centro Histórico de São Paulo, focando em uma estética documental e urbana.
+
+.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono text-zinc-300">
+                                <span class="glass-pill px-3 py-1 rounded-lg">Youtube</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg">Design</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg">Audiovisual</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-white/10">
+                        <a href="https://www.youtube.com/watch?v=giAk1xmyzM8" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
+                            Ver no YouTube <i class="fab fa-youtube ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="sobre" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <div class="fluid-card p-4 sm:p-6 relative group">
+                        <div class="card-light-spot"></div>
+                        <div class="fluid-img-wrapper aspect-square w-full">
+                            <img src="https://lh3.googleusercontent.com/a/ACg8ocKWxqewY5X8c89YLGrDRjrYMzrfzIlY4RlWUybkcEAREchBn9a4=s360-c-no" 
+                                 alt="Morisson Lima Foto" 
+                                 class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700">
+                            <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
+                        </div>
+                        <div class="mt-6 space-y-2 text-center">
+                            <h4 class="font-display font-bold text-lg text-white">Morisson Adriano Almeida Lima</h4>
+                            <p class="text-xs font-mono text-zinc-400 uppercase tracking-widest">Designer · São Paulo, SP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div>
+                        <span class="text-6xl font-display font-extrabold text-white/20 block -mb-4">03</span>
+                        <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2">03 · TRAJETÓRIA</span>
+                        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">Sobre Mim</h2>
+                    </div>
+
+                    <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                        Sou graduado em Design pela Universidade Federal de São Paulo - UNIFESP, e pós-graduando a nível de mestrado em Ciências pela mesma instituição. Atualmente foco no desenvolvimento de soluções de aprendizagem para área da saúde. Minha trajetória transita entre a estética de interfaces, a produções educacionais e o design de experiências interativas.
+                    </p>
+
+                    <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                        Acredito que o design educacional tem o poder de transformar conceitos complexos em jornadas instrucionais mais acessíveis. Seja criando plataformas web, simulações clínicas ou gerenciando conteúdos nas redes sociais.
+                    </p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 font-mono text-xs">
+                        <div class="glass-pill p-4 rounded-2xl">
+                            <span class="block text-white font-bold text-base mb-1">DI & UX</span>
+                            <span class="text-[10px] text-zinc-400">Design Instrucional</span>
+                        </div>
+                        <div class="glass-pill p-4 rounded-2xl">
+                            <span class="block text-white font-bold text-base mb-1">Saúde</span>
+                            <span class="text-[10px] text-zinc-400">Educação e Ciência</span>
+                        </div>
+                        <div class="glass-pill p-4 rounded-2xl">
+                            <span class="block text-white font-bold text-base mb-1">Mídia</span>
+                            <span class="text-[10px] text-zinc-400">Audiovisual & Social</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="py-20 px-6 max-w-7xl mx-auto w-full border-t border-white/10">
+            <div class="fluid-card p-8 sm:p-12 relative overflow-hidden">
+                <div class="card-light-spot"></div>
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block">04 · VAMOS CONVERSAR?</span>
+                        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">Inicie Um Projeto ou Parceria</h2>
+                        <p class="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-xl">
+                            Tem interesse em design instrucional, simulações educacionais, projetos em saúde ou gestão de mídia? Entre em contato por e-mail ou redes sociais.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <a href="mailto:morissonlima@gmail.com" class="px-6 py-3.5 bg-white text-black font-extrabold rounded-2xl hover:bg-zinc-200 transition-all text-xs uppercase tracking-wider flex items-center gap-2.5">
+                                <i class="fas fa-envelope"></i> Enviar E-mail
+                            </a>
+                            <a href="https://www.linkedin.com/in/morisson-adriano-almeida-lima-b622a3206/" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider flex items-center gap-2.5">
+                                <i class="fab fa-linkedin-in"></i> LinkedIn
+                            </a>
+                            <a href="https://www.linkedin.com/in/morisson-adriano-almeida-lima-b622a3206/" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider flex items-center gap-2.5">
+                                <i class="fab fa-behance"></i> Behance
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 space-y-4 font-mono text-xs">
+                        <div class="glass-pill p-5 rounded-2xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white shrink-0">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <span class="text-zinc-400 block text-[10px] uppercase">Localização</span>
+                                <span class="text-white font-bold text-sm">São Paulo, SP · Brasil</span>
+                            </div>
+                        </div>
+                        <div class="glass-pill p-5 rounded-2xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="text-zinc-400 block text-[10px] uppercase">E-mail Principal</span>
+                                <span class="text-white font-bold text-sm">morissonlima@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="glass-pill p-5 rounded-2xl flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                                <i class="fas fa-circle text-[8px] animate-pulse"></i>
+                            </div>
+                            <div>
+                                <span class="text-zinc-400 block text-[10px] uppercase">Disponibilidade</span>
+                                <span class="text-white font-bold text-sm">Aberto a Novos Projetos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-white/10 bg-black/90 py-8 px-6 text-center text-xs font-mono text-zinc-500 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p>© 2026 Morisson Lima. Todos os direitos reservados.</p>
+            <div class="flex items-center gap-6">
+                <a href="#hero" class="hover:text-white transition-colors uppercase tracking-wider">Voltar ao Topo <i class="fas fa-arrow-up ml-1"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Spotlight do cursor em tempo real
+        const spotlight = document.getElementById('cursor-spotlight');
+        window.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            spotlight.style.setProperty('--mouse-x', `${x}px`);
+            spotlight.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        // Efeito de brilho interativo dentro dos cards fluidos
+        document.querySelectorAll('.fluid-card').forEach(card => {
+            const spot = card.querySelector('.card-light-spot');
+            if(spot) {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    spot.style.left = `${x}px`;
+                    spot.style.top = `${y}px`;
+                });
+            }
+        });
+
+        // Menu Mobile Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        if(mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        }
+    </script>
+</body>
+</html>
