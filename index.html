@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morisson Lima — Designer Educacional</title>
+    <title data-i18n="page_title">Morisson Lima — Designer Educacional & Mídia</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -203,44 +203,52 @@
                 </div>
                 <div class="flex flex-col">
                     <span class="font-display font-extrabold text-sm tracking-tight text-white uppercase leading-none group-hover:text-zinc-200 transition-colors">Morisson Lima</span>
-                    <span class="text-[10px] text-zinc-400 font-mono tracking-widest uppercase mt-1">Designer Educacional</span>
+                    <span class="text-[10px] text-zinc-400 font-mono tracking-widest uppercase mt-1" data-i18n="role_title">Designer Educacional</span>
                 </div>
             </a>
 
             <!-- Navegação Desktop -->
-            <nav class="hidden md:flex items-center gap-8 text-xs font-mono font-bold uppercase tracking-widest">
-                <a href="#edtech" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-2 group">
-                    <span class="text-white/40 group-hover:text-white transition-colors">01</span> EdTech & DI
+            <nav class="hidden md:flex items-center gap-6 text-xs font-mono font-bold uppercase tracking-widest">
+                <a href="#edtech" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-1.5 group">
+                    <span class="text-white/40 group-hover:text-white transition-colors">01</span> <span data-i18n="nav_edtech">EdTech & DI</span>
                 </a>
-                <a href="#social" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-2 group">
-                    <span class="text-white/40 group-hover:text-white transition-colors">02</span> Social & Mídia
+                <a href="#social" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-1.5 group">
+                    <span class="text-white/40 group-hover:text-white transition-colors">02</span> <span data-i18n="nav_social">Social & Mídia</span>
                 </a>
-                <a href="#sobre" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-2 group">
-                    <span class="text-white/40 group-hover:text-white transition-colors">03</span> Sobre
+                <a href="#sobre" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-1.5 group">
+                    <span class="text-white/40 group-hover:text-white transition-colors">03</span> <span data-i18n="nav_about">Sobre</span>
                 </a>
-                <a href="#contato" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-2 group">
-                    <span class="text-white/40 group-hover:text-white transition-colors">04</span> Contato
+                <a href="#contato" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-1.5 group">
+                    <span class="text-white/40 group-hover:text-white transition-colors">04</span> <span data-i18n="nav_contact">Contato</span>
                 </a>
             </nav>
 
-            <!-- Status / Localização -->
-            <div class="hidden lg:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-300">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                SÃO PAULO · BR
-            </div>
+            <div class="flex items-center gap-3">
+                <!-- Botão Tradução Bilíngue PT / EN -->
+                <button id="lang-toggle" onclick="toggleLanguage()" class="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white text-[11px] font-mono font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg">
+                    <i class="fas fa-globe text-xs"></i>
+                    <span id="lang-label">EN / US</span>
+                </button>
 
-            <!-- Botão Menu Mobile -->
-            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-zinc-300 text-xl p-2 rounded-lg bg-white/5 border border-white/10" aria-label="Abrir menu mobile">
-                <i class="fas fa-bars"></i>
-            </button>
+                <!-- Status / Localização -->
+                <div class="hidden lg:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    SÃO PAULO · BR
+                </div>
+
+                <!-- Botão Menu Mobile -->
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-zinc-300 text-xl p-2 rounded-lg bg-white/5 border border-white/10" aria-label="Abrir menu mobile">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
 
         <!-- Menu Mobile Overlay -->
         <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 space-y-4 font-mono text-xs uppercase tracking-widest">
-            <a href="#edtech" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">01 · EdTech & DI</a>
-            <a href="#social" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">02 · Social Media & Mídia</a>
-            <a href="#sobre" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">03 · Sobre mim</a>
-            <a href="#contato" onclick="toggleMobileMenu()" class="block text-white font-bold py-2">04 · Contato</a>
+            <a href="#edtech" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">01 · <span data-i18n="nav_edtech">EdTech & DI</span></a>
+            <a href="#social" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">02 · <span data-i18n="nav_social">Social Media & Mídia</span></a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="block text-zinc-300 hover:text-white py-2">03 · <span data-i18n="nav_about">Sobre mim</span></a>
+            <a href="#contato" onclick="toggleMobileMenu()" class="block text-white font-bold py-2">04 · <span data-i18n="nav_contact">Contato</span></a>
         </div>
     </header>
 
@@ -264,38 +272,38 @@
                         MORISSON ADRIANO ALMEIDA LIMA
                     </div>
                     
-                    <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05]">
+                    <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.05]" data-i18n="hero_title">
                         Design, Educação <br>
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-200 via-zinc-400 to-zinc-600">& Saúde.</span>
                     </h1>
 
-                    <p class="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+                    <p class="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal" data-i18n="hero_desc">
                         Sou designer e tenho me dedicado à criação de experiências digitais que conectam educação e saúde. Transformando evidências científicas em conteúdos acessíveis por meio de metodologias ativas, gamificação e design centrado no usuário.
                     </p>
 
                     <!-- Pílulas de Especialidades -->
                     <div class="flex flex-wrap gap-2.5 pt-2 text-[11px] font-mono uppercase tracking-wider">
                         <span class="glass-pill px-4 py-2 rounded-xl text-white font-semibold flex items-center gap-2">
-                            <i class="fas fa-graduation-cap text-zinc-400"></i> Design Instrucional
+                            <i class="fas fa-graduation-cap text-zinc-400"></i> <span data-i18n="pill_1">Design Instrucional</span>
                         </span>
                         <span class="glass-pill px-4 py-2 rounded-xl text-white font-semibold flex items-center gap-2">
-                            <i class="fas fa-gamepad text-zinc-400"></i> Gamificação
+                            <i class="fas fa-gamepad text-zinc-400"></i> <span data-i18n="pill_2">Gamificação</span>
                         </span>
                         <span class="glass-pill px-4 py-2 rounded-xl text-white font-semibold flex items-center gap-2">
-                            <i class="fas fa-brain text-zinc-400"></i> IA na Educação
+                            <i class="fas fa-brain text-zinc-400"></i> <span data-i18n="pill_3">IA na Educação</span>
                         </span>
                         <span class="glass-pill px-4 py-2 rounded-xl text-white font-semibold flex items-center gap-2">
-                            <i class="fas fa-heartbeat text-zinc-400"></i> Educação em Saúde
+                            <i class="fas fa-heartbeat text-zinc-400"></i> <span data-i18n="pill_4">Educação em Saúde</span>
                         </span>
                     </div>
 
                     <!-- CTAs do Hero -->
                     <div class="flex flex-wrap items-center gap-4 pt-4">
                         <a href="#edtech" class="px-7 py-3.5 bg-white text-black font-extrabold rounded-2xl hover:bg-zinc-200 transition-all text-xs uppercase tracking-wider shadow-xl hover:shadow-white/10 flex items-center gap-2">
-                            Explorar Portfólio <i class="fas fa-arrow-down text-xs"></i>
+                            <span data-i18n="cta_explore">Explorar Portfólio</span> <i class="fas fa-arrow-down text-xs"></i>
                         </a>
                         <a href="#contato" class="px-7 py-3.5 bg-white/5 hover:bg-white/10 border border-white/20 text-white font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider backdrop-blur-md flex items-center gap-2">
-                            Iniciar Projeto <i class="fas fa-paper-plane text-xs"></i>
+                            <span data-i18n="cta_start">Iniciar Projeto</span> <i class="fas fa-paper-plane text-xs"></i>
                         </a>
                     </div>
                 </div>
@@ -311,7 +319,7 @@
                                  class="w-full h-full object-cover">
                             <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
                             <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-white text-[9px] font-mono font-bold px-3 py-1.5 rounded-full border border-white/20 tracking-wider uppercase">
-                                <i class="fas fa-sparkles text-amber-300 mr-1"></i> INTERAÇÃO & EXPERIÊNCIA
+                                <i class="fas fa-sparkles text-amber-300 mr-1"></i> <span data-i18n="badge_showcase">INTERAÇÃO & EXPERIÊNCIA</span>
                             </div>
                         </div>
 
@@ -320,10 +328,10 @@
                                 <span>UX/UI & DESIGN INSTRUCIONAL</span>
                                 <span class="text-emerald-400 font-bold">2026 EDITION</span>
                             </div>
-                            <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors">
+                            <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors" data-i18n="showcase_title">
                                 Interfaces educacionais & simulações em saúde
                             </h3>
-                            <p class="text-zinc-300 text-xs leading-relaxed">
+                            <p class="text-zinc-300 text-xs leading-relaxed" data-i18n="showcase_desc">
                                 Unindo rigor acadêmico, estética contemporânea e arquitetura de informação focada em aprendizado.
                             </p>
                         </div>
@@ -331,15 +339,15 @@
                         <div class="grid grid-cols-3 gap-2 pt-2 border-t border-white/10 font-mono text-center">
                             <div class="p-2 rounded-xl bg-white/5 border border-white/10">
                                 <span class="block text-sm font-bold text-white">100%</span>
-                                <span class="text-[9px] text-zinc-400 uppercase">Interativo</span>
+                                <span class="text-[9px] text-zinc-400 uppercase" data-i18n="stat_1">Interativo</span>
                             </div>
                             <div class="p-2 rounded-xl bg-white/5 border border-white/10">
                                 <span class="block text-sm font-bold text-white">EdTech</span>
-                                <span class="text-[9px] text-zinc-400 uppercase">Foco DI</span>
+                                <span class="text-[9px] text-zinc-400 uppercase" data-i18n="stat_2">Foco DI</span>
                             </div>
                             <div class="p-2 rounded-xl bg-white/5 border border-white/10">
                                 <span class="block text-sm font-bold text-white">Mídia</span>
-                                <span class="text-[9px] text-zinc-400 uppercase">Dados reais</span>
+                                <span class="text-[9px] text-zinc-400 uppercase" data-i18n="stat_3">Dados reais</span>
                             </div>
                         </div>
                     </div>
@@ -353,10 +361,10 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div>
                     <span class="text-6xl font-display font-extrabold text-white/20 block -mb-4">01</span>
-                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2">01 · PORTFÓLIO PRINCIPAL</span>
-                    <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">EdTech & Design Instrucional</h2>
+                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2" data-i18n="sec1_subtitle">01 · PORTFÓLIO PRINCIPAL</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white" data-i18n="sec1_title">EdTech & Design Instrucional</h2>
                 </div>
-                <p class="text-zinc-300 text-xs sm:text-sm max-w-md leading-relaxed">
+                <p class="text-zinc-300 text-xs sm:text-sm max-w-md leading-relaxed" data-i18n="sec1_desc">
                     Criação de produtos educacionais, simulações interativas e ambientes virtuais.
                 </p>
             </div>
@@ -372,7 +380,7 @@
                                  alt="Simulações Clínicas em Saúde" 
                                  class="w-full h-full object-cover">
                             <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
-                            <div class="absolute top-4 left-4 bg-white text-black text-[10px] font-mono font-extrabold px-3.5 py-1.5 rounded-full tracking-wider uppercase shadow-xl">
+                            <div class="absolute top-4 left-4 bg-white text-black text-[10px] font-mono font-extrabold px-3.5 py-1.5 rounded-full tracking-wider uppercase shadow-xl" data-i18n="proj1_tag">
                                 DESTAQUE · EDUCAÇÃO EM SAÚDE
                             </div>
                         </div>
@@ -380,11 +388,11 @@
 
                     <div class="lg:col-span-5 p-4 sm:p-6 flex flex-col justify-between h-full space-y-6">
                         <div class="space-y-3">
-                            <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold">CASOS CLÍNICOS REAIS</span>
-                            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white group-hover:text-zinc-200 transition-colors">
+                            <span class="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block font-bold" data-i18n="proj1_sub">CASOS CLÍNICOS REAIS</span>
+                            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white group-hover:text-zinc-200 transition-colors" data-i18n="proj1_title">
                                 Simulações clínicas em saúde
                             </h3>
-                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed" data-i18n="proj1_desc">
                                 Desenvolvimento de um site educacional para o ensino de Hematologia e Hemoglobinopatias com casos clínicos reais.
                             </p>
                         </div>
@@ -392,7 +400,7 @@
                         <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row gap-3">
                             <a href="https://sites.google.com/view/clinical-escape/in%C3%ADcio?authuser=0" target="_blank" rel="noopener noreferrer"
                                class="inline-flex items-center justify-center w-full py-3.5 bg-white text-black hover:bg-zinc-200 font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider shadow-lg">
-                                Ver Projeto Completo <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                                <span data-i18n="btn_view_project">Ver Projeto Completo</span> <i class="fas fa-arrow-right ml-2 text-xs"></i>
                             </a>
                         </div>
                     </div>
@@ -418,7 +426,7 @@
                         </div>
                         <div class="px-2 space-y-2 mb-6">
                             <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors">Unifesp Tô Dentro</h3>
-                            <p class="text-zinc-300 text-xs leading-relaxed">
+                            <p class="text-zinc-300 text-xs leading-relaxed" data-i18n="proj2_desc">
                                 App web focado na sensibilização de estudantes e sistema interativo para descoberta de carreira acadêmica e ingresso na universidade pública.
                             </p>
                         </div>
@@ -426,7 +434,7 @@
                     <div class="px-2 pb-2">
                         <a href="https://morissonlima.github.io/unifesptodentro/" target="_blank" rel="noopener noreferrer"
                            class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
-                            Visitar Web App <i class="fas fa-external-link-alt ml-2 text-[10px]"></i>
+                            <span data-i18n="btn_visit_app">Visitar Web App</span> <i class="fas fa-external-link-alt ml-2 text-[10px]"></i>
                         </a>
                     </div>
                 </div>
@@ -440,13 +448,13 @@
                                  alt="Portal NEI Paulistinha" 
                                  class="w-full h-full object-cover">
                             <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
-                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase" data-i18n="proj3_tag">
                                 PORTAL EDUCACIONAL
                             </div>
                         </div>
                         <div class="px-2 space-y-2 mb-6">
                             <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors">Portal NEI Paulistinha</h3>
-                            <p class="text-zinc-300 text-xs leading-relaxed">
+                            <p class="text-zinc-300 text-xs leading-relaxed" data-i18n="proj3_desc">
                                 Rebranding do site escolar NEI Paulistinha, com conteúdos pedagógicos, gestão de informação e comunicação escolar.
                             </p>
                         </div>
@@ -454,7 +462,7 @@
                     <div class="px-2 pb-2">
                         <a href="https://morissonlima.github.io/neipaulistinha/" target="_blank" rel="noopener noreferrer"
                            class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
-                            Visitar Portal <i class="fas fa-external-link-alt ml-2 text-[10px]"></i>
+                            <span data-i18n="btn_visit_portal">Visitar Portal</span> <i class="fas fa-external-link-alt ml-2 text-[10px]"></i>
                         </a>
                     </div>
                 </div>
@@ -468,13 +476,13 @@
                                  alt="Conteúdo Educativo em DI" 
                                  class="w-full h-full object-cover">
                             <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
-                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase" data-i18n="proj4_tag">
                                 BEHANCE & ARTIGOS
                             </div>
                         </div>
                         <div class="px-2 space-y-2 mb-6">
-                            <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors">Conteúdo Educativo em DI</h3>
-                            <p class="text-zinc-300 text-xs leading-relaxed">
+                            <h3 class="font-display font-bold text-xl text-white group-hover:text-zinc-200 transition-colors" data-i18n="proj4_title">Conteúdo Educativo em DI</h3>
+                            <p class="text-zinc-300 text-xs leading-relaxed" data-i18n="proj4_desc">
                                 Compartilho insights, artigos e projetos sobre Design Instrucional e Inteligência Artificial na Educação.
                             </p>
                         </div>
@@ -482,7 +490,7 @@
                     <div class="px-2 pb-2">
                         <a href="https://www.behance.net/morissoalmeida" target="_blank" rel="noopener noreferrer"
                            class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
-                            Ver no Behance <i class="fab fa-behance ml-2 text-[10px]"></i>
+                            <span data-i18n="btn_behance">Ver no Behance</span> <i class="fab fa-behance ml-2 text-[10px]"></i>
                         </a>
                     </div>
                 </div>
@@ -495,10 +503,10 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div>
                     <span class="text-6xl font-display font-extrabold text-white/20 block -mb-4">02</span>
-                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2">02 · BRANDING & MÍDIA</span>
-                    <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">Social media</h2>
+                    <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2" data-i18n="sec2_subtitle">02 · BRANDING & MÍDIA</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white" data-i18n="sec2_title">Social media</h2>
                 </div>
-                <p class="text-zinc-300 text-xs sm:text-sm max-w-md leading-relaxed">
+                <p class="text-zinc-300 text-xs sm:text-sm max-w-md leading-relaxed" data-i18n="sec2_desc">
                     Estratégia visual, copywriting, captação audiovisual e gestão de presença digital.
                 </p>
             </div>
@@ -515,7 +523,7 @@
                                  alt="Brunno Massoterapeuta" 
                                  class="w-full h-full object-cover">
                             <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
-                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase" data-i18n="client1_tag">
                                 SAÚDE & BEM-ESTAR
                             </div>
                         </div>
@@ -524,20 +532,20 @@
                                 <i class="fab fa-instagram text-white"></i> INSTAGRAM BRANDING
                             </div>
                             <h3 class="font-display font-bold text-2xl text-white group-hover:text-zinc-200 transition-colors">Brunno Massoterapeuta</h3>
-                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed" data-i18n="client1_desc">
                                 Desenvolvimento de artes gráficas e planejamento de conteúdo educacional na área de saúde. Criação de copywriting, edição de vídeos e estratégias de marketing.
                             </p>
                             <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono text-zinc-300">
                                 <span class="glass-pill px-3 py-1 rounded-lg">Branding</span>
                                 <span class="glass-pill px-3 py-1 rounded-lg">Copywriting</span>
-                                <span class="glass-pill px-3 py-1 rounded-lg">Edição de vídeo</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg" data-i18n="tag_video">Edição de vídeo</span>
                             </div>
                         </div>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <a href="https://www.instagram.com/brunnomassoterapeuta/" target="_blank" rel="noopener noreferrer"
                            class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
-                            Ver no Instagram <i class="fab fa-instagram ml-2 text-xs"></i>
+                            <span data-i18n="btn_instagram">Ver no Instagram</span> <i class="fab fa-instagram ml-2 text-xs"></i>
                         </a>
                     </div>
                 </div>
@@ -551,7 +559,7 @@
                                  alt="Fábio Freitas" 
                                  class="w-full h-full object-cover">
                             <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
-                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase" data-i18n="client2_tag">
                                 BRANDING & ESTILO
                             </div>
                         </div>
@@ -560,20 +568,20 @@
                                 <i class="fas fa-cut text-white"></i> SOCIAL MEDIA & MÍDIA
                             </div>
                             <h3 class="font-display font-bold text-2xl text-white group-hover:text-zinc-200 transition-colors">Fábio Freitas</h3>
-                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed" data-i18n="client2_desc">
                                 Gestão de presença digital e estratégia de conteúdo.
                             </p>
                             <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono text-zinc-300">
                                 <span class="glass-pill px-3 py-1 rounded-lg">Social Media</span>
-                                <span class="glass-pill px-3 py-1 rounded-lg">Conteúdo</span>
-                                <span class="glass-pill px-3 py-1 rounded-lg">Estratégia</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg" data-i18n="tag_content">Conteúdo</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg" data-i18n="tag_strategy">Estratégia</span>
                             </div>
                         </div>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <a href="https://www.instagram.com/fabiopie/" target="_blank" rel="noopener noreferrer"
                            class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
-                            Ver no Instagram <i class="fab fa-instagram ml-2 text-xs"></i>
+                            <span data-i18n="btn_instagram">Ver no Instagram</span> <i class="fab fa-instagram ml-2 text-xs"></i>
                         </a>
                     </div>
                 </div>
@@ -587,21 +595,21 @@
                                  alt="Festival Revelando SP" 
                                  class="w-full h-full object-cover">
                             <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
-                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase" data-i18n="event1_tag">
                                 COBERTURA & CULTURA
                             </div>
                         </div>
                         <div class="space-y-3 mb-6">
                             <div class="text-zinc-400 text-[10px] font-mono font-bold uppercase tracking-widest flex items-center gap-1.5">
-                                <i class="fas fa-camera text-white"></i> EVENTO CULTURAL
+                                <i class="fas fa-camera text-white"></i> <span data-i18n="event1_sub">EVENTO CULTURAL</span>
                             </div>
                             <h3 class="font-display font-bold text-2xl text-white group-hover:text-zinc-200 transition-colors">Festival Revelando SP</h3>
-                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed" data-i18n="event1_desc">
                                 Cobertura audiovisual, captação de conteúdo dinâmico em tempo real.
                             </p>
                             <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono text-zinc-300">
-                                <span class="glass-pill px-3 py-1 rounded-lg">Cobertura</span>
-                                <span class="glass-pill px-3 py-1 rounded-lg">Fotografia</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg" data-i18n="tag_coverage">Cobertura</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg" data-i18n="tag_photo">Fotografia</span>
                                 <span class="glass-pill px-3 py-1 rounded-lg">Vídeo</span>
                             </div>
                         </div>
@@ -609,7 +617,7 @@
                     <div class="pt-4 border-t border-white/10">
                         <a href="https://www.instagram.com/reels/C_xgl3IusYa/" target="_blank" rel="noopener noreferrer"
                            class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
-                            Ver Reels <i class="fab fa-instagram ml-2 text-xs"></i>
+                            <span data-i18n="btn_reels">Ver Reels</span> <i class="fab fa-instagram ml-2 text-xs"></i>
                         </a>
                     </div>
                 </div>
@@ -623,31 +631,29 @@
                                  alt="Festival do Café" 
                                  class="w-full h-full object-cover">
                             <div class="absolute inset-0 fluid-vignette pointer-events-none"></div>
-                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase">
+                            <div class="absolute top-3 left-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-[9px] font-mono font-extrabold px-3 py-1 rounded-full tracking-wider uppercase" data-i18n="event2_tag">
                                 EVENTO & MÍDIA
                             </div>
                         </div>
                         <div class="space-y-3 mb-6">
                             <div class="text-zinc-400 text-[10px] font-mono font-bold uppercase tracking-widest flex items-center gap-1.5">
-                                <i class="fas fa-coffee text-white"></i> MÍDIA AUDIOVISUAL
+                                <i class="fas fa-coffee text-white"></i> <span data-i18n="event2_sub">MÍDIA AUDIOVISUAL</span>
                             </div>
                             <h3 class="font-display font-bold text-2xl text-white group-hover:text-zinc-200 transition-colors">Festival do Café</h3>
-                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+                            <p class="text-zinc-300 text-xs sm:text-sm leading-relaxed" data-i18n="event2_desc">
                                 Captação de vídeos para o canal @todepasseio. Guia cinematográfico pelas 10 cafeterias mais icônicas do Centro Histórico de São Paulo, focando em uma estética documental e urbana.
-
-.
                             </p>
                             <div class="flex flex-wrap gap-2 pt-2 text-[10px] font-mono text-zinc-300">
                                 <span class="glass-pill px-3 py-1 rounded-lg">Youtube</span>
                                 <span class="glass-pill px-3 py-1 rounded-lg">Design</span>
-                                <span class="glass-pill px-3 py-1 rounded-lg">Audiovisual</span>
+                                <span class="glass-pill px-3 py-1 rounded-lg" data-i18n="tag_audiovisual">Audiovisual</span>
                             </div>
                         </div>
                     </div>
                     <div class="pt-4 border-t border-white/10">
                         <a href="https://www.youtube.com/watch?v=giAk1xmyzM8" target="_blank" rel="noopener noreferrer"
                            class="inline-flex items-center justify-center w-full py-3 bg-white/10 hover:bg-white hover:text-black border border-white/20 text-white font-extrabold rounded-xl transition-all text-[11px] uppercase tracking-wider backdrop-blur-md">
-                            Ver no YouTube <i class="fab fa-youtube ml-2 text-xs"></i>
+                            <span data-i18n="btn_youtube">Ver no YouTube</span> <i class="fab fa-youtube ml-2 text-xs"></i>
                         </a>
                     </div>
                 </div>
@@ -668,7 +674,7 @@
                         </div>
                         <div class="mt-6 space-y-2 text-center">
                             <h4 class="font-display font-bold text-lg text-white">Morisson Adriano Almeida Lima</h4>
-                            <p class="text-xs font-mono text-zinc-400 uppercase tracking-widest">Designer · São Paulo, SP</p>
+                            <p class="text-xs font-mono text-zinc-400 uppercase tracking-widest" data-i18n="about_location">Designer · São Paulo, SP</p>
                         </div>
                     </div>
                 </div>
@@ -676,30 +682,30 @@
                 <div class="lg:col-span-7 space-y-6">
                     <div>
                         <span class="text-6xl font-display font-extrabold text-white/20 block -mb-4">03</span>
-                        <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2">03 · TRAJETÓRIA</span>
-                        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">Sobre Mim</h2>
+                        <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block mb-2" data-i18n="sec3_subtitle">03 · TRAJETÓRIA</span>
+                        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white" data-i18n="sec3_title">Sobre Mim</h2>
                     </div>
 
-                    <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                    <p class="text-zinc-300 text-sm sm:text-base leading-relaxed" data-i18n="about_p1">
                         Sou graduado em Design pela Universidade Federal de São Paulo - UNIFESP, e pós-graduando a nível de mestrado em Ciências pela mesma instituição. Atualmente foco no desenvolvimento de soluções de aprendizagem para área da saúde. Minha trajetória transita entre a estética de interfaces, a produções educacionais e o design de experiências interativas.
                     </p>
 
-                    <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">
-                        Acredito que o design educacional tem o poder de transformar conceitos complexos em jornadas instrucionais mais acessíveis. Seja criando plataformas web, simulações clínicas ou gerenciando conteúdos nas redes sociais.
+                    <p class="text-zinc-300 text-sm sm:text-base leading-relaxed" data-i18n="about_p2">
+                        Acredito que o design educacional tem o poder de transformar conceitos complexos em jornadas intuitivas e engajadoras. Seja criando plataformas web, simulações clínicas ou gerenciando marcas e conteúdos nas redes sociais.
                     </p>
 
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 font-mono text-xs">
                         <div class="glass-pill p-4 rounded-2xl">
                             <span class="block text-white font-bold text-base mb-1">DI & UX</span>
-                            <span class="text-[10px] text-zinc-400">Design Instrucional</span>
+                            <span class="text-[10px] text-zinc-400" data-i18n="card_di">Design Instrucional</span>
                         </div>
                         <div class="glass-pill p-4 rounded-2xl">
-                            <span class="block text-white font-bold text-base mb-1">Saúde</span>
-                            <span class="text-[10px] text-zinc-400">Educação e Ciência</span>
+                            <span class="block text-white font-bold text-base mb-1" data-i18n="card_health_title">Saúde</span>
+                            <span class="text-[10px] text-zinc-400" data-i18n="card_health_desc">Educação e Ciência</span>
                         </div>
                         <div class="glass-pill p-4 rounded-2xl">
-                            <span class="block text-white font-bold text-base mb-1">Mídia</span>
-                            <span class="text-[10px] text-zinc-400">Audiovisual & Social</span>
+                            <span class="block text-white font-bold text-base mb-1" data-i18n="card_media_title">Mídia</span>
+                            <span class="text-[10px] text-zinc-400" data-i18n="card_media_desc">Audiovisual & Social</span>
                         </div>
                     </div>
                 </div>
@@ -713,20 +719,20 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                     <div class="lg:col-span-7 space-y-6">
-                        <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block">04 · VAMOS CONVERSAR?</span>
-                        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white">Inicie Um Projeto ou Parceria</h2>
-                        <p class="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-xl">
+                        <span class="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 block" data-i18n="sec4_subtitle">04 · VAMOS CONVERSAR?</span>
+                        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white" data-i18n="sec4_title">Inicie Um Projeto ou Parceria</h2>
+                        <p class="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-xl" data-i18n="sec4_desc">
                             Tem interesse em design instrucional, simulações educacionais, projetos em saúde ou gestão de mídia? Entre em contato por e-mail ou redes sociais.
                         </p>
 
                         <div class="flex flex-wrap gap-4 pt-2">
                             <a href="mailto:morissonlima@gmail.com" class="px-6 py-3.5 bg-white text-black font-extrabold rounded-2xl hover:bg-zinc-200 transition-all text-xs uppercase tracking-wider flex items-center gap-2.5">
-                                <i class="fas fa-envelope"></i> Enviar E-mail
+                                <i class="fas fa-envelope"></i> <span data-i18n="btn_email">Enviar E-mail</span>
                             </a>
                             <a href="https://www.linkedin.com/in/morisson-adriano-almeida-lima-b622a3206/" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider flex items-center gap-2.5">
                                 <i class="fab fa-linkedin-in"></i> LinkedIn
                             </a>
-                            <a href="https://www.linkedin.com/in/morisson-adriano-almeida-lima-b622a3206/" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider flex items-center gap-2.5">
+                            <a href="https://www.behance.net/morissoalmeida" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold rounded-2xl transition-all text-xs uppercase tracking-wider flex items-center gap-2.5">
                                 <i class="fab fa-behance"></i> Behance
                             </a>
                         </div>
@@ -738,7 +744,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
-                                <span class="text-zinc-400 block text-[10px] uppercase">Localização</span>
+                                <span class="text-zinc-400 block text-[10px] uppercase" data-i18n="loc_label">Localização</span>
                                 <span class="text-white font-bold text-sm">São Paulo, SP · Brasil</span>
                             </div>
                         </div>
@@ -747,7 +753,7 @@
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
-                                <span class="text-zinc-400 block text-[10px] uppercase">E-mail Principal</span>
+                                <span class="text-zinc-400 block text-[10px] uppercase" data-i18n="email_label">E-mail Principal</span>
                                 <span class="text-white font-bold text-sm">morissonlima@gmail.com</span>
                             </div>
                         </div>
@@ -756,8 +762,8 @@
                                 <i class="fas fa-circle text-[8px] animate-pulse"></i>
                             </div>
                             <div>
-                                <span class="text-zinc-400 block text-[10px] uppercase">Disponibilidade</span>
-                                <span class="text-white font-bold text-sm">Aberto a Novos Projetos</span>
+                                <span class="text-zinc-400 block text-[10px] uppercase" data-i18n="status_label">Disponibilidade</span>
+                                <span class="text-white font-bold text-sm" data-i18n="status_val">Aberto a Novos Projetos & Vagas Internacionais</span>
                             </div>
                         </div>
                     </div>
@@ -769,9 +775,9 @@
 
     <footer class="border-t border-white/10 bg-black/90 py-8 px-6 text-center text-xs font-mono text-zinc-500 relative z-10">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p>© 2026 Morisson Lima. Todos os direitos reservados.</p>
+            <p data-i18n="footer_rights">© 2026 Morisson Lima. Todos os direitos reservados.</p>
             <div class="flex items-center gap-6">
-                <a href="#hero" class="hover:text-white transition-colors uppercase tracking-wider">Voltar ao Topo <i class="fas fa-arrow-up ml-1"></i></a>
+                <a href="#hero" class="hover:text-white transition-colors uppercase tracking-wider"><span data-i18n="footer_top">Voltar ao Topo</span> <i class="fas fa-arrow-up ml-1"></i></a>
             </div>
         </div>
     </footer>
@@ -810,6 +816,190 @@
 
         if(mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        }
+
+        // Sistema de Tradução Bilíngue PT / EN
+        const translations = {
+            pt: {
+                page_title: "Morisson Lima — Designer Educacional & Mídia",
+                role_title: "Designer Educacional",
+                nav_edtech: "EdTech & DI",
+                nav_social: "Social & Mídia",
+                nav_about: "Sobre",
+                nav_contact: "Contato",
+                hero_title: "Design, Educação <br>& Saúde.",
+                hero_desc: "Sou designer e tenho me dedicado à criação de experiências digitais que conectam educação e saúde. Transformando evidências científicas em conteúdos acessíveis por meio de metodologias ativas, gamificação e design centrado no usuário.",
+                pill_1: "Design Instrucional",
+                pill_2: "Gamificação",
+                pill_3: "IA na Educação",
+                pill_4: "Educação em Saúde",
+                cta_explore: "Explorar Portfólio",
+                cta_start: "Iniciar Projeto",
+                badge_showcase: "INTERAÇÃO & EXPERIÊNCIA",
+                showcase_title: "Interfaces educacionais & simulações em saúde",
+                showcase_desc: "Unindo rigor acadêmico, estética contemporânea e arquitetura de informação focada em aprendizado.",
+                stat_1: "Interativo",
+                stat_2: "Foco DI",
+                stat_3: "Dados reais",
+                sec1_subtitle: "01 · PORTFÓLIO PRINCIPAL",
+                sec1_title: "EdTech & Design Instrucional",
+                sec1_desc: "Criação de produtos educacionais, simulações interativas e ambientes virtuais.",
+                proj1_tag: "DESTAQUE · EDUCAÇÃO EM SAÚDE",
+                proj1_sub: "CASOS CLÍNICOS REAIS",
+                proj1_title: "Simulações clínicas em saúde",
+                proj1_desc: "Desenvolvimento de um site educacional para o ensino de Hematologia e Hemoglobinopatias com casos clínicos reais.",
+                btn_view_project: "Ver Projeto Completo",
+                proj2_desc: "App web focado na sensibilização de estudantes e sistema interativo para descoberta de carreira acadêmica e ingresso na universidade pública.",
+                btn_visit_app: "Visitar Web App",
+                proj3_tag: "PORTAL EDUCACIONAL",
+                proj3_desc: "Rebranding do site escolar NEI Paulistinha, com conteúdos pedagógicos, gestão de informação e comunicação escolar.",
+                btn_visit_portal: "Visitar Portal",
+                proj4_tag: "BEHANCE & ARTIGOS",
+                proj4_title: "Conteúdo Educativo em DI",
+                proj4_desc: "Compartilho insights, artigos e projetos sobre Design Instrucional e Inteligência Artificial na Educação.",
+                btn_behance: "Ver no Behance",
+                sec2_subtitle: "02 · BRANDING & MÍDIA",
+                sec2_title: "Social media",
+                sec2_desc: "Estratégia visual, copywriting, captação audiovisual e gestão de presença digital.",
+                client1_tag: "SAÚDE & BEM-ESTAR",
+                client1_desc: "Desenvolvimento de artes gráficas e planejamento de conteúdo educacional na área de saúde. Criação de copywriting, edição de vídeos e estratégias de marketing.",
+                tag_video: "Edição de vídeo",
+                btn_instagram: "Ver no Instagram",
+                client2_tag: "BRANDING & ESTILO",
+                client2_desc: "Gestão de presença digital e estratégia de conteúdo.",
+                tag_content: "Conteúdo",
+                tag_strategy: "Estratégia",
+                event1_tag: "COBERTURA & CULTURA",
+                event1_sub: "EVENTO CULTURAL",
+                event1_desc: "Cobertura audiovisual, captação de conteúdo dinâmico em tempo real.",
+                tag_coverage: "Cobertura",
+                tag_photo: "Fotografia",
+                btn_reels: "Ver Reels",
+                event2_tag: "EVENTO & MÍDIA",
+                event2_sub: "MÍDIA AUDIOVISUAL",
+                event2_desc: "Captação de vídeos para o canal @todepasseio. Guia cinematográfico pelas 10 cafeterias mais icônicas do Centro Histórico de São Paulo, focando em uma estética documental e urbana.",
+                tag_audiovisual: "Audiovisual",
+                btn_youtube: "Ver no YouTube",
+                about_location: "Designer · São Paulo, SP",
+                sec3_subtitle: "03 · TRAJETÓRIA",
+                sec3_title: "Sobre Mim",
+                about_p1: "Sou graduado em Design Educacional pela Universidade Federal de São Paulo - UNIFESP e mestrando em Ciências pela mesma instituição. Atualmente atuo no desenvolvimento de soluções de aprendizagem para a área da saúde, conectando educação, tecnologia e design. Minha trajetória transita entre o design de interfaces, a produção educacional e a criação de experiências interativas.",
+                about_p2: "Acredito que o design educacional tem o poder de transformar conceitos complexos em jornadas intuitivas e engajadoras. Seja criando plataformas web, simulações clínicas ou gerenciando marcas e conteúdos nas redes sociais.",
+                card_di: "Design istrucional",
+                card_health_title: "Saúde",
+                card_health_desc: "Educação e ciência",
+                card_media_title: "Mídia",
+                card_media_desc: "Audiovisual",
+                sec4_subtitle: "04 · VAMOS CONVERSAR?",
+                sec4_title: "Inicie Um Projeto ou Parceria",
+                sec4_desc: "Tem interesse em design instrucional, simulações educacionais, projetos em saúde ou gestão de mídia? Entre em contato por e-mail ou redes sociais.",
+                btn_email: "Enviar E-mail",
+                loc_label: "Localização",
+                email_label: "E-mail Principal",
+                status_label: "Disponibilidade",
+                status_val: "Aberto a novos projetos e vagas internacionais",
+                footer_rights: "© 2026 Morisson Lima. Todos os direitos reservados.",
+                footer_top: "Voltar ao Topo"
+            },
+            en: {
+                page_title: "Morisson Lima — Educational Designer & Media",
+                role_title: "Educational Designer",
+                nav_edtech: "EdTech & ID",
+                nav_social: "Social & Media",
+                nav_about: "About",
+                nav_contact: "Contact",
+                hero_title: "Design, Education <br>& Health.",
+                hero_desc: "I am a designer dedicated to creating digital experiences that connect education and health. Transforming scientific evidence into accessible content through active methodologies, gamification, and user-centered design.",
+                pill_1: "Instructional Design",
+                pill_2: "Gamification",
+                pill_3: "AI in Education",
+                pill_4: "Health Education",
+                cta_explore: "Explore Portfolio",
+                cta_start: "Start Project",
+                badge_showcase: "INTERACTION & EXPERIENCE",
+                showcase_title: "Educational interfaces & health simulations",
+                showcase_desc: "Combining academic rigor, contemporary aesthetics, and learner-focused information architecture.",
+                stat_1: "Interactive",
+                stat_2: "ID Focus",
+                stat_3: "Real Data",
+                sec1_subtitle: "01 · MAIN PORTFOLIO",
+                sec1_title: "EdTech & Instructional Design",
+                sec1_desc: "Creation of educational products, interactive simulations, and virtual environments.",
+                proj1_tag: "FEATURED · HEALTH EDUCATION",
+                proj1_sub: "REAL CLINICAL CASES",
+                proj1_title: "Clinical health simulations",
+                proj1_desc: "Development of an educational website for teaching Hematology and Hemoglobinopathies with real clinical cases.",
+                btn_view_project: "View Full Project",
+                proj2_desc: "Web app focused on student awareness and interactive system for discovering academic careers and public university admission.",
+                btn_visit_app: "Visit Web App",
+                proj3_tag: "EDUCATIONAL PORTAL",
+                proj3_desc: "Rebranding of NEI Paulistinha school website, featuring pedagogical content, information management, and school communication.",
+                btn_visit_portal: "Visit Portal",
+                proj4_tag: "BEHANCE & ARTICLES",
+                proj4_title: "Educational Content in ID",
+                proj4_desc: "Sharing insights, articles, and projects on Instructional Design and Artificial Intelligence in Education.",
+                btn_behance: "View on Behance",
+                sec2_subtitle: "02 · BRANDING & MEDIA",
+                sec2_title: "Social media",
+                sec2_desc: "Visual strategy, copywriting, audiovisual capture, and digital presence management.",
+                client1_tag: "HEALTH & WELLNESS",
+                client1_desc: "Development of graphic arts and educational content planning in health. Copywriting creation, video editing, and marketing strategies.",
+                tag_video: "Video Editing",
+                btn_instagram: "View on Instagram",
+                client2_tag: "BRANDING & STYLE",
+                client2_desc: "Digital presence management and content strategy.",
+                tag_content: "Content",
+                tag_strategy: "Strategy",
+                event1_tag: "COVERAGE & CULTURE",
+                event1_sub: "CULTURAL EVENT",
+                event1_desc: "Audiovisual coverage, real-time dynamic content capture.",
+                tag_coverage: "Coverage",
+                tag_photo: "Photography",
+                btn_reels: "View Reels",
+                event2_tag: "EVENT & MEDIA",
+                event2_sub: "AUDIOVISUAL MEDIA",
+                event2_desc: "Video capture for @todepasseio channel. Cinematic guide through the 10 most iconic coffee shops in São Paulo's Historic Center, focusing on documentary and urban aesthetics.",
+                tag_audiovisual: "Audiovisual",
+                btn_youtube: "View on YouTube",
+                about_location: "Designer · São Paulo, Brazil",
+                sec3_subtitle: "03 · TRAJECTORY",
+                sec3_title: "About Me",
+                about_p1: "I hold a degree in Educational Design from the Federal University of São Paulo (UNIFESP) and am currently pursuing a Master’s degree in Sciences at the same institution. I focus on developing learning solutions for the healthcare field, connecting education, technology, and design. My background lies at the intersection of interface design, educational content development, and the creation of interactive learning experiences.",
+                about_p2: "I believe educational design has the power to transform complex concepts into intuitive and engaging journeys, whether creating web platforms, clinical simulations, or managing brand and social content.",
+                card_di: "Instructional Design",
+                card_health_title: "Health",
+                card_health_desc: "Education & Science",
+                card_media_title: "Media",
+                card_media_desc: "Audiovisual & Social",
+                sec4_subtitle: "04 · LET'S TALK?",
+                sec4_title: "Start a Project or Partnership",
+                sec4_desc: "Interested in instructional design, educational simulations, health projects, or media management? Get in touch via email or social media.",
+                btn_email: "Send Email",
+                loc_label: "Location",
+                email_label: "Main Email",
+                status_label: "Availability",
+                status_val: "Open to new projects and international roles",
+                footer_rights: "© 2026 Morisson Lima. All rights reserved.",
+                footer_top: "Back to Top"
+            }
+        };
+
+        let currentLang = 'pt';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            document.getElementById('lang-label').innerText = currentLang === 'pt' ? 'EN / US' : 'PT / BR';
+            
+            // Traduzir todos os elementos com data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+
+            // Atualizar o atributo lang da página
+            document.documentElement.setAttribute('lang', currentLang === 'pt' ? 'pt-BR' : 'en');
         }
     </script>
 </body>
